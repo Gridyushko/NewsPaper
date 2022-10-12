@@ -1,0 +1,112 @@
+(venv) C:\Users\gridila\PycharmProjects\project_sql\NewsPaper>python manage.py makemigrations
+Migrations for 'news':
+  news\migrations\0001_initial.py
+    - Create model Author
+    - Create model Category
+    - Create model Post
+    - Create model PostCategory
+    - Add field postCategory to post
+    - Create model Comment
+
+(venv) C:\Users\gridila\PycharmProjects\project_sql\NewsPaper>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, news, sessions
+Running migrations:
+  Applying news.0001_initial... OK
+
+(venv) C:\Users\gridila\PycharmProjects\project_sql\NewsPaper>python manage.py shell
+Python 3.8.9 (tags/v3.8.9:a743f81, Apr  6 2021, 14:02:34) [MSC v.1928 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from newapp.models import *
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+ModuleNotFoundError: No module named 'newapp'
+>>> from news.models import *
+>>> u1=User.objects.create_user(username='Dan')
+>>> u2=User.objects.create_user(username='Fil')
+>>> Author.objects.create(authorUser=u1
+... Author.objects.create(authorUser=u1)
+  File "<console>", line 2
+    Author.objects.create(authorUser=u1)
+    ^
+SyntaxError: invalid syntax
+>>> author.objects.create(authorUser=u1)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'author' is not defined
+>>> Author.objects.create(authorUser=u1)
+<Author: Author object (1)>
+>>>  Author.objects.create(authorUser=u2)
+  File "<console>", line 1
+    Author.objects.create(authorUser=u2)
+    ^
+IndentationError: unexpected indent
+>>> Author.objects.create(authorUser=u2)
+<Author: Author object (2)>
+>>> Category.objects.create(name='music')
+<Category: Category object (1)>
+>>> Category.objects.create(name='text')
+<Category: Category object (2)>
+>>> Category.objects.create(name='style')
+<Category: Category object (3)>
+>>> Category.objects.create(name='rating')
+<Category: Category object (4)>
+>>> author=Author.objects.get(id=1)
+>>> author=Author.objects.get(id=2)
+>>> Post.objects.create(author=author, categoryType='NW', title='sometitle', text='somebigtext')
+<Post: Post object (1)>
+>>> Post.object.get(id=1)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'Post' has no attribute 'object'
+>>> Post.objects.get(id=1)
+<Post: Post object (1)>
+>>> Post.objects.get(id=1).title
+'sometitle'
+>>> Post.objects.get(id=1).postCategory.add(Category.objects.get(id=1))
+>>>  Post.objects.get(id=1).postCategory.add(Category.objects.get(id=1))
+  File "<console>", line 1
+    Post.objects.get(id=1).postCategory.add(Category.objects.get(id=1))
+    ^
+IndentationError: unexpected indent
+>>>  Post.objects.get(id=1).postCategory.add(Category.objects.get(id=1))
+  File "<console>", line 1
+    Post.objects.get(id=1).postCategory.add(Category.objects.get(id=1))
+    ^
+IndentationError: unexpected indent
+>>>  Post.objects.get(id=1).postCategory.add(Category.objects.get(id=1))
+  File "<console>", line 1
+    Post.objects.get(id=1).postCategory.add(Category.objects.get(id=1))
+    ^
+IndentationError: unexpected indent
+>>> Post.objects.get(id=1).postCategory.add(Category.objects.get(id=1))
+>>>  Post.objects.get(id=1).postCategory.add(Category.objects.get(id=2))
+  File "<console>", line 1
+    Post.objects.get(id=1).postCategory.add(Category.objects.get(id=2))
+    ^
+IndentationError: unexpected indent
+>>> Post.objects.get(id=1).postCategory.add(Category.objects.get(id=2))
+>>> Comment.objects.create(commentPost=Post.objects.get(id=1), commentUser=Author.objects.get(id=1).authorUser, text='anytextbyauthor')
+<Comment: Comment object (1)>
+>>> Comment.objects.get(id=1).like()
+>>> Comment.objects.get(id=1).dislike()
+>>>  Comment.objects.get(id=1).dislike()
+  File "<console>", line 1
+    Comment.objects.get(id=1).dislike()
+    ^
+IndentationError: unexpected indent
+>>> Comment.objects.get(id=1).rating
+0
+>>> Comment.objects.get(id=1).like()
+>>> Comment.objects.get(id=1).like()
+>>> Comment.object.get(id=1).rating
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'Comment' has no attribute 'object'
+>>> Comment.objects.get(id=1).rating
+2
+>>> Author.objects.get(id=1)
+<Author: Author object (1)>
+>>> a=Author.objects.get(id=1)
+>>> a.update_rating()

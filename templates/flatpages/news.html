@@ -1,0 +1,40 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% load custom_tags %}
+
+
+{% block title %}
+News
+{% endblock title %}
+
+{% block content %}
+   <h1>Все новости</h1>
+   <h3>{{ news|length }}</h3>
+   <h3>{{ time_now|date:'d M Y' }}</h3>
+   <hr>
+   {% if news %}
+       <table>
+           <tr>
+               <td>Title</td>
+               <td>Date</td>
+               <td>Preview</td>
+           </tr>
+
+           {% for posts in post %}
+           <tr>
+               <td>{{ posts.title|censor }}</td>
+               <td>{{ posts.dateCreation|censor }}</td>
+                <!-- Добавим специальный фильтр truncatechars,
+                чтобы ограничить количество символов до 20.
+                Все остальные символы превратятся в многоточие. -->
+               <td>{{ post.description|truncatechars:20 }}</td>
+           </tr>
+           {% endfor %}
+
+       </table>
+   {% else %}
+       <h2>Новостей нет!</h2>
+   {% endif %}
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% block title %}
+Post
+{% endblock title %}
+
+
+{% block content %}
+   <h1>Пост</h1>
+   <h3>{{ time_now|date:'d M Y' }}</h3>
+   <hr>
+   {% if post %}
+       <table>
+           <tr>
+               <td>Заголовок</td>
+               <td>текст</td>
+           </tr>
+       </table>
+   {% else %}
+       <h2>Статья удалена!</h2>
+   {% endif %}
+{% endblock content %}
